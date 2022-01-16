@@ -49,7 +49,7 @@
                   <div class="time">{{post.timestamp}}</div>
                   </div>
                   <v-col class="text-right">
-                  <el-button v-if="post.user != myName && !isFollowing(post.user)" color="#2617b0" type="primary" style="text-align: right" @click="handleFollow(post.user)">Follow</el-button>
+                  <el-button v-if="post.user != myName && !isFollowing(post.user)" color="#2617b0" type="primary" style="margin-left: 200px" @click="handleFollow(post.user)">Follow</el-button>
                   <el-button v-if="post.user != myName && isFollowing(post.user)" color="#2617b0" type="primary" style="margin-left: 200px" @click="handleUnfollow(post.user)">Unfollow</el-button>
                   </v-col>
                   </el-row>
@@ -76,6 +76,17 @@
                 </div>
                 </el-card>
             </el-space>
+            <el-space style="margin-left: 20px" direction="vertical">
+            <h4 style="color:white">Followers</h4>
+            <el-card v-for="fan in fans" :key="fan" class="fan-card">
+              <template #header>
+                <User style="width: 20px; height: 20px; margin-right: 20px" />
+                <span>{{ fan.user }}</span>
+
+              </template>
+            <span>{{ fan.description }}</span>
+            </el-card>
+          </el-space>
         </el-main>
   </el-container>
 
@@ -89,6 +100,7 @@
   import allPosts from '@/data/posts.js'
   import allProjects from '@/data/projects.js'
   import allProfiles from '@/data/profiles.js'
+  import allfans from '@/data/fans.js'
   import Navbar from "../components/navbar.vue"
   const input = ref('')
   var project = ''
@@ -112,8 +124,10 @@
     setup() {
       const posts = ref(allPosts)
       const projects = ref(allProjects)
+      const fans = ref(allfans)
       const profiles = ref(allProfiles)
-      return { posts, input, projects, myName, profiles }
+      
+      return { posts, input, projects, myName, profiles, fans }
     },
     components: {
       Picture,
@@ -234,9 +248,15 @@
   .el-aside {
     background-color: #2D2D2D;
     text-align: center;
-    line-height: 320px;
+    line-height: 5px;
     color: var(--el-text-color-primary);
     text-align: center;
   }
+  .fan-card {
+    background-color: #2D2D2D;
+    color: white;
+    width: 200px;
+  }
+
 }
 </style>
