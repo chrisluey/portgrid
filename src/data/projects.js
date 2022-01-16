@@ -1,7 +1,7 @@
 export default [
     {
       name: 'Deep Learning',
-      description: 'Ive been debugging all day',
+      description: 'Program related to machine learning made with python libraries',
       status: 'Completed',
       type: 'Work',
       fromDate: "April 2019",

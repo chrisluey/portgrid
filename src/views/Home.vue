@@ -12,7 +12,7 @@
    
     </el-header>
     <el-container>
-        <el-aside width="200px">hello</el-aside>
+        <el-aside>hello</el-aside>
         <el-main>
             <el-space direction="vertical">
                 <el-card class="update-card">
@@ -35,7 +35,7 @@
                         </el-dropdown-menu>
                         </template>
                     </el-dropdown>
-                      <el-button color="#2617b0" type="primary" style="margin-left: 250px" @click="handlePost">Post</el-button>
+                      <el-button color="#2617b0" type="primary" style="margin-left: 10px" @click="handlePost">Post</el-button>
                     </el-container>
                   </template>
                 </el-card>
@@ -49,8 +49,8 @@
                   <div class="time">{{post.timestamp}}</div>
                   </div>
                   <v-col class="text-right">
-                  <el-button v-if="post.user != myName && !isFollowing(post.user)" color="#2617b0" type="primary" style="margin-left: 200px" @click="handleFollow(post.user)">Follow</el-button>
-                  <el-button v-if="post.user != myName && isFollowing(post.user)" color="#2617b0" type="primary" style="margin-left: 200px" @click="handleUnfollow(post.user)">Unfollow</el-button>
+                  <el-button v-if="post.user != myName && !isFollowing(post.user)" color="#2617b0" type="primary" style="margin-left: 20px" @click="handleFollow(post.user)">Follow</el-button>
+                  <el-button v-if="post.user != myName && isFollowing(post.user)" color="#2617b0" type="primary" style="margin-left: 20px" @click="handleUnfollow(post.user)">Unfollow</el-button>
                   </v-col>
                   </el-row>
                   <div class="comments">{{ post.description }}</div>
@@ -81,8 +81,8 @@
                 </div>
                 </el-card>
             </el-space>
-            <el-space style="margin-left: 20px" direction="vertical">
-            <h4 style="color:white">Followers</h4>
+            <el-space style="margin-left: 55px" direction="vertical">
+            <span style="color:white; font-size:large;">Followers</span>
             <el-card v-for="fan in fans" :key="fan" class="fan-card">
               <template #header>
                 <User style="width: 20px; height: 20px; margin-right: 20px" />
@@ -228,14 +228,19 @@
   .box-card {
     background-color: #2D2D2D;
     color: white;
-    width: 600px;
+    width: 1000px;
+    border: 5px;
+    margin-left: 35px;
   }
   .update-card {
     background-color: #2D2D2D;
     color: white;
-    width: 600px;
+    width: 1000px;
     height: 100px;
     position: top;
+    border: 5px;
+    margin-top: 35px;
+    margin-left: 35px;
   }
   .el-header {
     background-color: #2D2D2D;
@@ -259,6 +264,7 @@
     line-height: 5px;
     color: var(--el-text-color-primary);
     text-align: center;
+    width: 300px;
   }
   .fan-card {
     background-color: #2D2D2D;

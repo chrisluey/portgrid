@@ -58,11 +58,11 @@
 
                     </el-header>
                 <img style="max-height:75px;max-width:75px;border-radius:5px;position:absolute;top:70px;left:20px;z-index:1;" src="../data/images/blank-profile-picture-973460_1280.png">
-                <h3>Generic Name <el-button class="profile_add_section">Add profile section</el-button>
+                <h3>John Smith<el-button class="profile_add_section">Add profile section</el-button>
                 <el-button class="more_button">More...</el-button></h3>
                 <h5> Student<br>Vancouver, BC </h5>
                 <h4>About Me </h4>
-                <p>Some stuff bla a lot of stuff, student stuff, I love computer science wahoo</p>
+                <p>I'm a 3rd year computer science student at UBC. My favourite topics are machine learning and algorithms.</p>
 
             </el-container>
             <!-- <el-header class="project_header" id="Work">
@@ -73,7 +73,7 @@
 
             <el-container v-for="type of types" :key=type :id=type>
             <el-header  class="project_header" >
-                <h3>{{type}} Projects<el-icon :size="25" style="margin-left: 550px" color="#8f8e8c"><List />
+                <h3>{{type}} Projects<el-icon :size="25" style="margin-left: 10px" color="#8f8e8c"><List />
                 </el-icon><el-icon :size="25" style="margin-left: 5px" color="#DADADA"><Menu />
                 </el-icon><el-button style="width:30px;background-color:transparent;border-color:transparent" @click="dialogVisible = true">
                     <el-icon @click="dialogVisible=true" :size="25" style="margin-left: 5px" color="#DADADA"><Plus /></el-icon>
@@ -237,7 +237,7 @@
 .profile_add_section {
     background-color: #2617b0;
     color: #979797;
-    margin-left: 300px;
+    margin-left: 20px;
     border-color: #2617b0;
     width: 200px;
     height: 40px;
