@@ -32,25 +32,37 @@
                   </template>
                 </el-card>
                 <el-card v-for="post in posts" :key="post" class="box-card">
-                <template #header>
-                <User style="width: 40px; height: 40px; margin-right: 20px" />
-                <span>{{ post.user }}</span>
-                <div class="project">{{post.project}}</div>
-                <div class="comments">{{ post.description }}</div>
-                <el-row class="mb-4" style="margin-top: 20px;">
-                <el-button color="#2D2D2D" type="primary">
-                    Upvote<el-icon class="el-icon--right"><Top /></el-icon>
-                </el-button>
-                <el-button color="#2D2D2D" type="primary">
-                    Comment<el-icon class="el-icon--right"><ChatDotSquare /></el-icon>
-                </el-button>
-                <el-button color="#2D2D2D" type="primary">
+                  <template #header>
+                  <el-row>
+                  <User style="width: 40px; height: 40px; margin-right: 20px" />
+                  <div>
+                  <span>{{ post.user }}</span>
+                  <span class="project">{{post.project}}</span>
+                  <div class="time">{{post.timestamp}}</div>
+                  </div>
+                  </el-row>
+                  <div class="comments">{{ post.description }}</div>
+                  <el-row class="mb-4" style="margin-top: 20px;">
+                  <div class="comments">{{post.upvotes}}</div>
+                  <el-button color="#2D2D2D" type="primary" @click="handleUpvote(post)">
+                    <el-icon class="el-icon--left"><Top /></el-icon>
+                  </el-button>
+                  <el-button color="#2D2D2D" type="primary">
+                    Comments<el-icon class="el-icon--right"><ChatDotSquare /></el-icon>
+                  </el-button>
+                  <el-button color="#2D2D2D" type="primary">
                     Share<el-icon class="el-icon--right"><Position /></el-icon>
-                </el-button>
-                </el-row>  
+                  </el-button>
+                  </el-row>  
                 </template>
                 <div class="comments" v-for="comment in post.comments" :key="comment">{{comment}}</div>
-            </el-card>
+                <div class="input-header" style="margin-top: 10px">
+                <el-input v-model="post.comments[-1]" placeholder="Write a comment." />
+                <el-button color="#2617b0" type="primary" style="margin-left: 15px;" @click="handleComment(post)">
+                    Share<el-icon class="el-icon--right"><Position /></el-icon>
+                  </el-button>
+                </div>
+                </el-card>
             </el-space>
         </el-main>
   </el-container>
@@ -79,6 +91,10 @@
     return result += x
   }
 
+  const getDate = () => {
+    return new Date().toString().substring(0, 21);
+  }
+
   export default {
     setup() {
       const posts = ref(allPosts)
@@ -96,26 +112,47 @@
     },
     methods: {
       handlePost: function () {
-          ref(allPosts).value.push({
+          ref(allPosts).value.unshift({
               user: "Christopher Luey",
               description: shorten(input.value),
-              project: project
+              project: project,
+              timestamp: getDate(),
+              upvotes: 0,
+              comments: []
           });
           input.value = ''
       }, 
       handleProject: function (name) {
         project = name
       },
-      handleComment: function (comment) {
-        alert(comment)
+      handleComment: function (post) {
+        //alert(post.comments[-1])
+        for (var x of ref(allPosts).value) {
+            if (x == post) {
+                post.comments.push(shorten(post.comments[-1]))
+                post.comments[-1] = ""
+            }
+        }
+      },
+      handleUpvote: function (post) {
+          for (var x of ref(allPosts).value) {
+              if (x == post) {
+                  post.upvotes += 1
+              }
+          }
       }
     }
   }
 </script>
 
 <style lang="scss">
-
+.time {
+    color: #979797;
+    font-size: 75%;
+    margin-bottom: 10px;
+}
 .project {
+    margin-left: 15px;
     color: #2617b0
 }
 .input-header {
