@@ -1,7 +1,15 @@
 <template>
+   
   <div class="common-layout">
+    
     <el-header>
-    <img src="@/assets/logo.png" alt="logo" style="width:100px;height:100px;">
+     <el-container>
+      <img src="@/assets/logo.png" alt="logo" style="width:100px;height:100px;">
+     <nav>
+      <navbar></navbar>
+    </nav>
+      </el-container> 
+   
     </el-header>
     <el-container>
         <el-aside width="200px">hello</el-aside>
@@ -64,7 +72,7 @@
   import { ref } from 'vue'
   import allPosts from '@/data/posts.js'
   import allProjects from '@/data/projects.js'
-
+  import Navbar from "../components/navbar.vue"
   const input = ref('')
   var project = ''
 
@@ -90,7 +98,8 @@
       ArrowDown,
       Top,
       ChatDotSquare,
-      Position
+      Position,
+      Navbar
     },
     methods: {
       handlePost: function () {

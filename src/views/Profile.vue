@@ -24,13 +24,11 @@
 </style>
 
 <script>
-import navbar from "../components/navbar.vue"
+
 import Navbar from "../components/navbar.vue"
 export default{
     name: "Home",
-    componets: {
-        "navbar": navbar
-    },
+    
     components: { Navbar }
 }
 </script>
