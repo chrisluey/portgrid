@@ -1,8 +1,8 @@
 <template>
   <div class="common-layout">
-    <el-header>
-    <img src="@/assets/logo.png" alt="logo" style="width:100px;height:100px;">
-    </el-header>
+    <nav>
+      <el-button size="large" style="background-color: #2D2D2D; height: 80px;padding:0px"><navbar></navbar></el-button>
+    </nav>
     <el-container>
         <el-aside width="200px">hello</el-aside>
         <el-main>
@@ -64,6 +64,7 @@
   import { ref } from 'vue'
   import allPosts from '@/data/posts.js'
   import allProjects from '@/data/projects.js'
+  import navbar from '@/components/navbar.vue'
 
   const input = ref('')
   var project = ''
@@ -90,7 +91,8 @@
       ArrowDown,
       Top,
       ChatDotSquare,
-      Position
+      Position,
+      navbar
     },
     methods: {
       handlePost: function () {
@@ -151,7 +153,7 @@
     height: 100px;
     position: top;
   }
-  .el-header {
+  .nav {
     background-color: #2D2D2D;
     text-align: left;
     color: var(--el-text-color-primary);
