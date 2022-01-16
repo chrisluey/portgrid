@@ -17,7 +17,15 @@ export default [
         timestamp: 'Sun Jan 16 2022 01:17',
         upvotes: 0,
         data: [],
-        comments: ["Amazing!", "nice."]
+        comments: [{
+          user: "Christopher Luey",
+          body: "Amazing!",
+          timestamp: 'Sun Jan 16 2022 7:45'
+        }, {
+          user: "John Gates",
+          body: "nice.",
+          timestamp: 'Sun Jan 16 2022 8:01'
+        }]
     },
     {
         user: 'Christopher Luey',
@@ -27,7 +35,15 @@ export default [
         timestamp: 'Sun Jan 16 2022 01:05',
         upvotes: 0,
         data: [],
-        comments: ["Excited to see what it looks like", "nice."]
+        comments: [{
+          user: "John Gates",
+          body: "Excited to see what it looks like",
+          timestamp: 'Sun Jan 16 2022 9:29'
+        }, {
+          user: "Christopher Luey",
+          body: "nice.",
+          timestamp: 'Sun Jan 16 2022 9:35'
+        }]
     },
     
   ]
