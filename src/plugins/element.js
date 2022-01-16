@@ -3,4 +3,5 @@ import '../element-variables.scss'
 
 export default (app) => {
   app.use(ElementPlus)
+  
 }

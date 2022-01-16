@@ -2,7 +2,7 @@
   <div>
     <h1>Welcome</h1>
     <nav>
-      <el-button style="background-color:black;"><navbar></navbar></el-button>
+      <el-button size="large" style="background-color:black"><navbar></navbar></el-button>
     </nav>
     <p>This page no longer exists or was moved to another location.</p>
   </div>
