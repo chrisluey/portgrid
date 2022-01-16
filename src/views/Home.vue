@@ -12,7 +12,24 @@
    
     </el-header>
     <el-container>
-        <el-aside width="200px">hello</el-aside>
+        <el-aside>
+          <el-space direction="vertical">
+            Followers
+            <el-card v-for="fan in fans" :key="fan" class="fan-card">
+              <template #header>
+                <User style="width: 20px; height: 20px; margin-right: 20px" />
+                <span>{{ fan.user }}</span>
+                
+              </template>
+            <span>{{ fan.description }}</span>
+            </el-card>
+          
+          
+          
+          
+          
+          </el-space>
+        </el-aside>
         <el-main>
             <el-space direction="vertical">
                 <el-card class="update-card">
@@ -61,6 +78,7 @@
             </el-card>
             </el-space>
         </el-main>
+       
   </el-container>
 
   <p>{{input}}</p>
@@ -72,6 +90,7 @@
   import { ref } from 'vue'
   import allPosts from '@/data/posts.js'
   import allProjects from '@/data/projects.js'
+  import allfans from '@/data/fans.js'
   import Navbar from "../components/navbar.vue"
   const input = ref('')
   var project = ''
@@ -90,7 +109,8 @@
     setup() {
       const posts = ref(allPosts)
       const projects = ref(allProjects)
-      return { posts, input, projects }
+      const fans = ref(allfans)
+      return { posts, input, projects , fans}
     },
     components: {
       Picture,
@@ -115,7 +135,17 @@
       },
       handleComment: function (comment) {
         alert(comment)
-      }
+      },
+      handlefans: function () {
+          ref(allfans).value.push({
+              user: User,
+              description: Position
+          });
+          input.value = ''
+      },
+      handlede: function (desci) {
+        alert(desci)
+      },
     }
   }
 </script>
@@ -179,9 +209,15 @@
   .el-aside {
     background-color: #2D2D2D;
     text-align: center;
-    line-height: 320px;
+    line-height: 5px;
     color: var(--el-text-color-primary);
     text-align: center;
   }
+  .fan-card {
+    background-color: #2D2D2D;
+    color: white;
+    width: 200px;
+  }
+  
 }
 </style>
