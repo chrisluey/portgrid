@@ -160,7 +160,7 @@
     height: 100px;
     position: top;
   }
-  .nav {
+  .el-header {
     background-color: #2D2D2D;
     text-align: left;
     color: var(--el-text-color-primary);
