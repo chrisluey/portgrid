@@ -48,6 +48,10 @@
                   <span class="project">{{post.project}}</span>
                   <div class="time">{{post.timestamp}}</div>
                   </div>
+                  <v-col class="text-right">
+                  <el-button v-if="post.user != myName && !isFollowing(post.user)" color="#2617b0" type="primary" style="text-align: right" @click="handleFollow(post.user)">Follow</el-button>
+                  <el-button v-if="post.user != myName && isFollowing(post.user)" color="#2617b0" type="primary" style="margin-left: 200px" @click="handleUnfollow(post.user)">Unfollow</el-button>
+                  </v-col>
                   </el-row>
                   <div class="comments">{{ post.description }}</div>
                   <el-row class="mb-4" style="margin-top: 20px;">
@@ -84,9 +88,11 @@
   import { ref } from 'vue'
   import allPosts from '@/data/posts.js'
   import allProjects from '@/data/projects.js'
+  import allProfiles from '@/data/profiles.js'
   import Navbar from "../components/navbar.vue"
   const input = ref('')
   var project = ''
+  const myName = 'Christopher Luey'
 
   const shorten = (x) => {
     var result = ''
@@ -106,7 +112,8 @@
     setup() {
       const posts = ref(allPosts)
       const projects = ref(allProjects)
-      return { posts, input, projects }
+      const profiles = ref(allProfiles)
+      return { posts, input, projects, myName, profiles }
     },
     components: {
       Picture,
@@ -133,7 +140,6 @@
         project = name
       },
       handleComment: function (post) {
-        //alert(post.comments[-1])
         for (var x of ref(allPosts).value) {
             if (x == post) {
                 post.comments.push(shorten(post.comments[-1]))
@@ -147,6 +153,18 @@
                   post.upvotes += 1
               }
           }
+      },
+      handleFollow: function (name) {
+          ref(allProfiles).value[myName]['following'].push(name)
+      },
+      handleUnfollow: function (name) {
+        const following = ref(allProfiles).value[myName]['following']
+        const index = following.indexOf(name)
+        // alert(following.splice(index, following.length))
+        if (index > -1) ref(allProfiles).value[myName]['following'].splice(index, 1)
+      },
+      isFollowing: function (name) {
+          return ref(allProfiles).value[myName]['following'].includes(name)
       }
     }
   }
