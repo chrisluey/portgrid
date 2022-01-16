@@ -67,7 +67,12 @@
                   </el-button>
                   </el-row>  
                 </template>
-                <div class="comments" v-for="comment in post.comments" :key="comment">{{comment}}</div>
+                <div v-for="comment in post.comments" :key="comment" style="margin-top: 10px">
+                    <User style="width: 20px; height: 20px; margin-right: 10px;" />
+                    <span style="color: #979797">{{ comment.user }}</span>
+                    <div class="time" style="margin-bottom: 0px">{{comment.timestamp}}</div>
+                    <div class="comments">{{comment.body}}</div>
+                </div>
                 <div class="input-header" style="margin-top: 10px">
                 <el-input v-model="post.comments[-1]" placeholder="Write a comment." />
                 <el-button color="#2617b0" type="primary" style="margin-left: 15px;" @click="handleComment(post)">
@@ -156,7 +161,11 @@
       handleComment: function (post) {
         for (var x of ref(allPosts).value) {
             if (x == post) {
-                post.comments.push(shorten(post.comments[-1]))
+                post.comments.push({
+                    user: myName,
+                    body: shorten(post.comments[-1]),
+                    timestamp: getDate()
+                })
                 post.comments[-1] = ""
             }
         }
@@ -174,7 +183,6 @@
       handleUnfollow: function (name) {
         const following = ref(allProfiles).value[myName]['following']
         const index = following.indexOf(name)
-        // alert(following.splice(index, following.length))
         if (index > -1) ref(allProfiles).value[myName]['following'].splice(index, 1)
       },
       isFollowing: function (name) {
