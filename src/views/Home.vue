@@ -1,6 +1,17 @@
 <template>
-  <div>
-    <h1>Welcome</h1>
-    <p>This page no longer exists or was moved to another location.</p>
+  <div id="home" style="background-color:#2D2D2D;">
+    <NavBar />
   </div>
 </template>
+
+<script>
+import NavBar from '@/components/NavBar.vue'
+export default {
+  name: "home",
+  components: {
+    NavBar
+  },
+}
+</script>
+
+]
