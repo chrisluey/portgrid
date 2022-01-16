@@ -12,24 +12,7 @@
    
     </el-header>
     <el-container>
-        <el-aside>
-          <el-space direction="vertical">
-            Followers
-            <el-card v-for="fan in fans" :key="fan" class="fan-card">
-              <template #header>
-                <User style="width: 20px; height: 20px; margin-right: 20px" />
-                <span>{{ fan.user }}</span>
-                
-              </template>
-            <span>{{ fan.description }}</span>
-            </el-card>
-          
-          
-          
-          
-          
-          </el-space>
-        </el-aside>
+        <el-aside width="200px">hello</el-aside>
         <el-main>
             <el-space direction="vertical">
                 <el-card class="update-card">
@@ -89,6 +72,17 @@
                 </div>
                 </el-card>
             </el-space>
+            <el-space direction="vertical">
+            <h1>Followers</h1>
+            <el-card v-for="fan in fans" :key="fan" class="fan-card">
+              <template #header>
+                <User style="width: 20px; height: 20px; margin-right: 20px" />
+                <span>{{ fan.user }}</span>
+                
+              </template>
+            <span>{{ fan.description }}</span>
+            </el-card>
+          </el-space>
         </el-main>
        
   </el-container>
