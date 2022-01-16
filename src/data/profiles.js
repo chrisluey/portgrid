@@ -1,5 +1,5 @@
 export default {
-    'Christopher Luey': {
+    'John Smith': {
     profilepic: [],
     project: 'Deep Learning',
     following: ['Bobby Bill', 'John Gates']

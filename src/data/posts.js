@@ -28,7 +28,7 @@ export default [
         }]
     },
     {
-        user: 'Christopher Luey',
+        user: 'John Smith',
         profilepic: [],
         project: 'Deep Learning',
         description: 'Working very hard. Woohoo',

@@ -109,7 +109,7 @@
   import Navbar from "../components/navbar.vue"
   const input = ref('')
   var project = ''
-  const myName = 'Christopher Luey'
+  const myName = 'John Smith'
 
   const shorten = (x) => {
     var result = ''
@@ -146,7 +146,7 @@
     methods: {
       handlePost: function () {
           ref(allPosts).value.unshift({
-              user: "Christopher Luey",
+              user: myName,
               description: shorten(input.value),
               project: project,
               timestamp: getDate(),
