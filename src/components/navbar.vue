@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class = "test">
     <h2></h2>
-    <nav>
+    <nav class="test2">
     <router-link class="spacing" to="/"><el-icon size="30"><HomeFilled /></el-icon>Home</router-link>
                        
     <router-link class="spacing" to="/Profile"><el-icon size="30"><User /></el-icon>Profile</router-link>
@@ -26,12 +26,19 @@ import { Upload } from '@element-plus/icons'
 
 <style>
 .spacing {
-    margin-left: 50px;
-    margin-right: 50px;
-    color: white;
-    font-size: 50px;
-   padding-left:30px;
-   padding-right:30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: #9593a0;
+    font-size: 20px;
+   padding-left:10px;
+   padding-right:10px;
+}
+.test {
+  background-color: #2d2d2d;
+}
+.test2 {
+  margin-left: 20vw;
+  margin-top: 20px;
 }
 
 </style>

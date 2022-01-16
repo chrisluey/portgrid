@@ -4,7 +4,8 @@ export default [
       profilepic: [],
       project: 'Deep Learning',
       description: 'Ive been debugging all day',
-      likes: 0,
+      timestamp: 'Sun Jan 16 2022 01:12',
+      upvotes: 0,
       data: [],
       comments: []
     },
@@ -13,7 +14,8 @@ export default [
         profilepic: [],
         project: 'Deep Learning',
         description: 'Working very hard. Woohoo',
-        likes: 0,
+        timestamp: 'Sun Jan 16 2022 01:05',
+        upvotes: 0,
         data: [],
         comments: ["weird", "nice."]
     },
