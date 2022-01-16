@@ -1,7 +1,3 @@
-<script setup>
-import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
-</script>
-
 <template>
 <el-header class="placeholder_header"> 
     <el-container>
@@ -13,20 +9,45 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
     </el-header>
   <el-container class="main_container">
       
-    
+    <el-dialog v-model="dialogVisible" title="New Project" width="30%"><span>Name: </span>
+    <el-input v-model="input" width="30%">Input </el-input>
+    <span>Description: </span>
+    <el-input v-model="input" width="30%">Input </el-input>
+    <span>Status: </span>
+    <el-input v-model="input" width="30%">Input </el-input>
+    <span>Type: </span>
+    <el-input v-model="input" width="30%">Input </el-input>
+    <span>Date From: </span>
+    <el-input v-model="input" width="30%">Input </el-input>
+    <span>Date To: </span>
+    <el-input v-model="input" width="30%">Input </el-input>
+    <span>Affliated To: </span>
+    <el-input v-model="input" width="30%">Input </el-input>
+    <span>Image: </span>
+    <el-input v-model="input" width="30%">Input </el-input>
+    <template #footer>
+        <span class="dialog-footer">
+            <el-button style="width:100px;height:40px">Cancel</el-button>
+            <el-button style="background-color:#2617b0;color:#ffffff;width:100px;height:40px">Save</el-button>
+            </span>
+        </template>
+    </el-dialog>
     <!-- <el-button type="primary"> Element UI </el-button> -->
     <el-aside class="left-panel">
         <el-scrollbar>
             <el-menu active-text-color="#dfdfe3">
-                <el-menu-item index="1">
+                <el-menu-item v-for="(type, i) of types" :key="type" :index=i @click="handleSection(type)">
+                    {{type}} Projects
+                    </el-menu-item>
+                <!-- <el-menu-item index="1" @click="window.location.href='#work'">
                     Work Projects
                 </el-menu-item>
-                <el-menu-item index="2">
+                <el-menu-item index="2" @click="testFunction(projects)">
                     School Projects
                 </el-menu-item>
-                <el-menu-item index="3">
+                <el-menu-item index="3" @click="handleSection('#personal')">
                     Personal Projects
-                </el-menu-item>
+                </el-menu-item> -->
             </el-menu>
         </el-scrollbar>
     </el-aside>
@@ -36,36 +57,49 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
                 <el-header class="profile_accent">
 
                     </el-header>
-                <h3>Generic Name </h3>
+                <img style="max-height:75px;max-width:75px;border-radius:5px;position:absolute;top:70px;left:20px;z-index:1;" src="../data/images/blank-profile-picture-973460_1280.png">
+                <h3>Generic Name <el-button class="profile_add_section">Add profile section</el-button>
+                <el-button class="more_button">More...</el-button></h3>
                 <h5> Student<br>Vancouver, BC </h5>
                 <h4>About Me </h4>
                 <p>Some stuff bla a lot of stuff, student stuff, I love computer science wahoo</p>
 
             </el-container>
-            <el-header class="project_header">
+            <!-- <el-header class="project_header" id="Work">
                 <h3>Work Projects<el-icon :size="25" style="margin-left: 605px" color="#8f8e8c"><List />
                 </el-icon><el-icon :size="25" style="margin-left: 5px" color="#DADADA"><Menu />
                 </el-icon><el-icon :size="25" style="margin-left: 5px" color="#DADADA"><Plus /></el-icon>    </h3>                
+            </el-header> -->
+
+            <el-container v-for="type of types" :key=type :id=type>
+            <el-header  class="project_header" >
+                <h3>{{type}} Projects<el-icon :size="25" style="margin-left: 550px" color="#8f8e8c"><List />
+                </el-icon><el-icon :size="25" style="margin-left: 5px" color="#DADADA"><Menu />
+                </el-icon><el-button style="width:30px;background-color:transparent;border-color:transparent" @click="dialogVisible = true">
+                    <el-icon @click="dialogVisible=true" :size="25" style="margin-left: 5px" color="#DADADA"><Plus /></el-icon>
+                    </el-button>
+                        </h3>                
             </el-header>
             
             <el-container class="project_container" direction="vertical">
-                <el-container>
+                <el-container v-for="project in projects[type]" :key=project>
                     <el-aside class="project-image">
-                    <img style="max-height:50px;max-width:50px" src="../data/images/startup-2561668-2140274.webp">
+                    <img style="max-height:50px;max-width:50px" src="../data/images/startup-2561668-2140274.webp"  >
                     </el-aside>
                     <el-main class="project-body">
-                        <h4>Sample Project</h4>
-                        <p>Startup 456 <br> January 2022 - Present </p>
+                        <h4>{{project.name}}</h4>
+                        <p>{{project.affliation}} <br> {{project.fromDate}} - {{project.toDate}} </p>
+                        <p> <small>{{project.description}}</small> </p>
                     </el-main>
-                    <el-aside class="project-status in_progress">
-                        <h5 >In Progress</h5>
+                    <el-aside :class="camelCase(project.status)">
+                        <h5 >{{project.status}}</h5>
                     </el-aside>
                     <el-aside class="project-button">
                         <el-icon :size="25" style="margin-top:5px" color="#2617b0"><Edit /></el-icon>
                     </el-aside>
                 </el-container>
 
-                <el-container>
+                <!-- <el-container>
                     <el-aside class="project-image">
                     <img style="max-height:50px;max-width:50px" src="../data/images/startup-2561668-2140274.webp">
                     </el-aside>
@@ -77,12 +111,13 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
                         <h5>Completed</h5>
                     </el-aside>
                     <el-aside class="project-button">
-                        <el-icon :size="25" style="margin-top:5px" color="#2617b0"><Edit /></el-icon>
+                        <el-icon :size="25" style="margin-top:5px" color="#2617b0"><Edit/></el-icon>
                     </el-aside>
-                </el-container>
+                </el-container> -->
+            </el-container>
             </el-container>
 
-            <el-header class="project_header">
+            <!-- <el-header class="project_header">
                 <h3>School Projects<el-icon :size="25" style="margin-left: 590px" color="#8f8e8c"><List />
                 </el-icon><el-icon :size="25" style="margin-left: 5px" color="#DADADA"><Menu />
                 </el-icon><el-icon :size="25" style="margin-left: 5px" color="#DADADA"><Plus /></el-icon>    </h3>                
@@ -122,13 +157,13 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
                 </el-container>
             </el-container>
 
-            <el-header class="project_header">
+            <el-header class="project_header" id='personal'>
                 <h3>Personal Projects<el-icon :size="25" style="margin-left: 580px" color="#8f8e8c"><List />
                 </el-icon><el-icon :size="25" style="margin-left: 5px" color="#DADADA"><Menu />
                 </el-icon><el-icon :size="25" style="margin-left: 5px" color="#DADADA"><Plus /></el-icon>    </h3>                
-            </el-header>
+            </el-header> -->
             
-            <el-container class="project_container" direction="vertical">
+            <!-- <el-container class="project_container" direction="vertical">
                 <el-container>
                     <el-aside class="project-image">
                     <img style="max-height:50px;max-width:50px" src="../data/images/256x256bb.jpg">
@@ -160,7 +195,7 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
                         <el-icon :size="25" style="margin-top:5px" color="#2617b0"><Edit /></el-icon>
                     </el-aside>
                 </el-container>
-            </el-container>
+            </el-container> -->
 
         </el-scrollbar>
     </el-main>
@@ -199,6 +234,23 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
     text-align: center;
 }
 
+.profile_add_section {
+    background-color: #2617b0;
+    color: #979797;
+    margin-left: 300px;
+    border-color: #2617b0;
+    width: 200px;
+    height: 40px;
+}
+
+.more_button {
+    background-color: #2d2d2d;
+    color: #9593a0;
+    border-color: #9593a0;
+    width: 100px;
+    height: 40px;
+}
+
 .project-status {
     margin-top: 20px;
     width: 100px;
@@ -206,12 +258,36 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
     margin-right: 10px;
 }
 
-.completed {
+.Completed {
     background-color: #2617b0;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+    margin-right: 10px;
 }
 
-.in_progress {
+.Completed h5 {
+    color: #ffffff;
+    font-weight: 500;
+    margin-top: 11px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.In_Progress {
     background-color: #4bb543;
+    margin-top: 20px;
+    width: 100px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.In_Progress h5 {
+    color: #ffffff;
+    font-weight: 500;
+    margin-top: 11px;
+    font-size: 15px;
+    text-align: center;
 }
 
 .project-status h5 {
@@ -225,6 +301,7 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
 .aside_recs {
     margin-top: 35px;
     width: 300px;
+    height: 60%;
 }
 
 .el-menu {
@@ -248,12 +325,15 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
     border-radius: 5px;
     margin-bottom: 5px;
     margin-top: 5px;
+    position: relative;
 }
 
 .profile_container h3 {
     color: #ffffff;
     font-size: 20px;
     font-weight: 600;
+    height: 40px;
+    margin-top: 30px;
 }
 
 .profile_container p {
@@ -346,6 +426,7 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
     height: 100px;
     width: 100%;
     background-color: #ccc9c4;
+    background-image: url("../data/images/cf55c376b35a222f00a63ff5e49a605b.jpg");
     border: 5px #ccc9c4;
     border-radius: 5px;
 
@@ -386,11 +467,73 @@ import { List, Menu, Plus, Edit } from '@element-plus/icons-vue'
 </style>
 
 <script>
-
+import { List, Menu, Plus, Edit } from "@element-plus/icons-vue"
 import Navbar from "../components/navbar.vue"
-export default{
-    name: "Home",
+import { ref } from 'vue'
+import allProjects from '@/data/projects.js'
+
+
+const separateProjects = (fakeProjects) => {
+    let projects = fakeProjects["_rawValue"];
+    let result = {};
+    for (const project of projects) {
+        let type = project["type"];
+        if (!(project["type"] in result)) {
+            result[type] = [];
+        }
+        result[type].push(project);
+    }
+    return result;
+}
+
+const getProjectTypes = (fakeProjects) => {
+    let projects = fakeProjects["_rawValue"];
+    let types = [];
+    for (const project of projects) {
+        if (!types.includes(project["type"])) {
+            types.push(project["type"]);
+        }
+    }
+    return types;
+}
+
+
+export default {
+    name: "Profile",
+    setup() {
+      let temp_projects = ref(allProjects)
+      const types = getProjectTypes(temp_projects)
+      const projects = separateProjects(temp_projects)
+      console.log(projects);
+      console.log(projects["Work"]);
+      console.log("types: " + types.length);
+      var dialogVisible = ref(false);
+      return { projects, types, dialogVisible }
+    },
     
-    components: { Navbar }
+    components: { 
+        Navbar,
+        List,
+        Menu,
+        Plus,
+        Edit
+     },
+    methods: {
+        handleSection: function (section) {
+            // window.location.href = section;
+            console.log(section);
+            document.getElementById(section).scrollIntoView();
+            
+        },
+        testFunction: function (projects) {
+            console.log("test");
+            window.location.href='#personal'
+            console.log("Projects length: " + projects.length);
+        },
+        camelCase: function (str) {
+            // console.log("testttt" + str);
+            return str.split(' ').join('_');
+        }
+    }
 }
 </script>
